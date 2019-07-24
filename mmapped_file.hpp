@@ -1,3 +1,4 @@
+// See LICENSE for license details.
 
 #ifndef MMAPPED_FILE_INCLUDED_
 #define MMAPPED_FILE_INCLUDED_
