@@ -7,6 +7,7 @@
 #include <array>
 #include <algorithm>
 
+namespace {
 inline std::vector<int> prime_factors(int n) {
     std::vector<int> fs;
     // Preallocate some space (fully optional)
@@ -19,7 +20,13 @@ inline std::vector<int> prime_factors(int n) {
     }
     return fs;
 }
+}
 
+/**
+ * Dims_create mimics the functionality of MPI_Dims_create.
+ * The implementation, however, is restricted to 3 dimensions only.
+ * Uses a greedy algorithm, as e.g. OpenMPI also does.
+ */
 inline std::array<int, 3> dims_create(int n) {
     auto fs = prime_factors(n);
 
