@@ -26,6 +26,8 @@ inline std::vector<int> prime_factors(int n) {
  * Dims_create mimics the functionality of MPI_Dims_create.
  * The implementation, however, is restricted to 3 dimensions only.
  * Uses a greedy algorithm, as e.g. OpenMPI also does.
+ * Output is *not* necessarily sorted (i.e. dims[0] is largest
+ * and dims[2] is smallest).
  */
 inline std::array<int, 3> dims_create(int n) {
     auto fs = prime_factors(n);
