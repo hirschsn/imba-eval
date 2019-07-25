@@ -7,6 +7,7 @@
 #include <vector>
 #include <array>
 
+namespace {
 template <int D>
 struct InlineFolder {
     using point_type = std::array<double, D>;
@@ -40,7 +41,12 @@ inline T product(const std::array<T, D>& arr)
 {
     return std::accumulate(std::begin(arr), std::end(arr), T{1}, std::multiplies<T>{});
 }
+}
 
+/**
+ * Bins points into buckets (determined by nbins and bounding_box)
+ * and counts the number of points per bucket.
+ */
 template <int D>
 struct Bins {
     using index_type = std::array<int, D>;

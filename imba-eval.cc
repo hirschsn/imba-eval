@@ -48,6 +48,7 @@ R var(const std::vector<T>& v)
 }
 
 // For boost::program_options
+namespace streamable {
 template <int N>
 struct NDoubles {
     typename Bins<N>::point_type data;
@@ -63,6 +64,7 @@ std::istream& operator>>(std::istream& is, NDoubles<N>& ti)
     }
     return is;
 }
+}
 
 int main(int argc, char **argv)
 {
@@ -74,7 +76,7 @@ int main(int argc, char **argv)
     desc.add_options()
         ("help", "produce help message")
         ("file", po::value<std::string>(), "MPI-IO position file")
-        ("box", po::value<NDoubles<3>>(), "Bounding box of the simulation")
+        ("box", po::value<streamable::NDoubles<3>>(), "Bounding box of the simulation")
         ("nproc", po::value<int>(), "Number of processes")
     ;
 
@@ -89,7 +91,7 @@ int main(int argc, char **argv)
 
     const auto fn = vm["file"].as<std::string>();
     const auto nbins = dims_create(vm["nproc"].as<int>());
-    const auto bbox = vm["box"].as<NDoubles<3>>().data;
+    const auto bbox = vm["box"].as<streamable::NDoubles<3>>().data;
 
     std::cout << "File : " << fn << std::endl;
     std::cout << "NProc: " << vm["nproc"].as<int>() << " = " << nbins[0] << " x " << nbins[1] << " x " << nbins[2] << std::endl;
